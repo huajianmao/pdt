@@ -14,5 +14,5 @@
 	path = src/glog
 	url = https://github.com/google/glog
 [submodule "googletest"]
-	path = googletest
+	path = src/googletest
 	url = https://github.com/google/googletest
