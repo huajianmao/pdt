@@ -2,7 +2,7 @@
 
 # 0. Set environment
 export ENABLE_DEBUG=on
-export DO_TEST=on
+export DO_TEST=off
 export INSTALL_PREFIX=/tmp/pdt
 
 export OS_NAME=`uname -a | cut -d' ' -f 1 |  tr '[:upper:]' '[:lower:]'`
