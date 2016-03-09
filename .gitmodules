@@ -1,0 +1,18 @@
+[submodule "folly"]
+	path = src/folly
+	url = https://github.com/facebook/folly
+[submodule "wdt"]
+	path = src/wdt
+	url = https://github.com/facebook/wdt
+[submodule "gflags"]
+	path = src/gflags
+	url = https://github.com/gflags/gflags
+[submodule "double-conversion"]
+	path = src/double-conversion
+	url = https://github.com/google/double-conversion
+[submodule "glog"]
+	path = src/glog
+	url = https://github.com/google/glog
+[submodule "googletest"]
+	path = src/googletest
+	url = git@github.com:google/googletest.git

@@ -1,0 +1,68 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2a073cf..548d57b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -121,6 +121,12 @@ find_library(GLOG_LIBRARY glog)
+ # Gflags
+ find_path(GFLAGS_INCLUDE_DIR gflags/gflags.h)
+ find_library(GFLAGS_LIBRARY gflags)
++# Gmock
++find_path(GMOCK_INCLUDE_DIR gmock/gmock.h)
++find_library(GMOCK_LIBRARY gmock)
++# Gtest
++find_path(GTEST_INCLUDE_DIR gtest/gtest.h)
++find_library(GTEST_LIBRARY gtest)
+ # OpenSSL's crypto lib
+ find_package(OpenSSL REQUIRED)
+ include_directories(${OPENSSL_INCLUDE_DIR})
+@@ -198,6 +204,8 @@ target_link_libraries(folly4wdt ${GLOG_LIBRARY})
+ include_directories(${CMAKE_CURRENT_BINARY_DIR})
+ include_directories(${FOLLY_SOURCE_DIR})
+ include_directories(${GLOG_INCLUDE_DIR})
++include_directories(${GMOCK_INCLUDE_DIR})
++include_directories(${GTEST_INCLUDE_DIR})
+ include_directories(${GFLAGS_INCLUDE_DIR})
+ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
+ 
+@@ -243,39 +251,12 @@ if (BUILD_TESTING)
+     test/TestCommon.cpp
+   )
+ 
+-  include(ExternalProject)
+-
+-  # GMock
+-  set(GMOCK_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/gmock")
+-  externalproject_add(
+-    gmock
+-    SVN_REPOSITORY https://googlemock.googlecode.com/svn/trunk/
+-    INSTALL_COMMAND "" # Disable install step
+-    UPDATE_COMMAND "" # Doesn't change often
+-    PREFIX "${GMOCK_PREFIX}"
+-    #CONFIGURE_COMMAND "" # skip
+-    #BUILD_COMMAND "" # skip
+-    LOG_DOWNLOAD ON
+-    LOG_CONFIGURE ON
+-    LOG_BUILD ON
+-  )
+-  # Specify include dir for both gmock and gtest
+-  externalproject_get_property(gmock SOURCE_DIR)
+-  include_directories("${SOURCE_DIR}/include" "${SOURCE_DIR}/gtest/include")
+-
+-  externalproject_get_property(gmock BINARY_DIR)
+-
+-  #  add_library(gmock_all STATIC EXCLUDE_FROM_ALL
+-  #   ${GMOCK_PREFIX}/src/gmock/gtest/src/gtest-all.cc
+-  #   ${GMOCK_PREFIX}/src/gmock/gmock-all.cc
+-  #   ${GMOCK_PREFIX}/src/gmock/gmock_main.cc)
+-
+-  add_dependencies(wdt4tests_min gmock)
+ 
+   # ${BINARY_DIR}/libgmock.a works everywhere except xcode...
+ # so ugly weird hack generating warnings about unknown dir for now:
+   target_link_libraries(wdt4tests_min
+-    "-L ${BINARY_DIR} -L ${BINARY_DIR}/Debug -lgmock"
++    ${GMOCK_LIBRARY}
++    ${GTEST_LIBRARY}
+     wdt_min
+   )
+ 

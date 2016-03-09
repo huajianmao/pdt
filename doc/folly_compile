@@ -1,0 +1,70 @@
+1、./configure 后会碰到not found glog的问题，解决步骤
+   a、注释掉configure.ac 中的AC_MSG_ERROR相关的invalid检查的代码
+   b、./configure CPPFLAGS="-I/usr/local/include" LDFLAGS="-L/usr/local/lib"
+2、./configure通过后，make过程出现新的问题：
+   libtool: compile:  g++ -DHAVE_CONFIG_H -I./.. -pthread -I/usr/include -I/usr/local/include -std=gnu++0x -g -O2 -MT FileUtil.lo -MD -MP -MF .deps/FileUtil.Tpo -c FileUtil.cpp  -DDLL_EXPORT -DPIC -o .libs/FileUtil.o
+   libtool: compile:  g++ -DHAVE_CONFIG_H -I./.. -pthread -I/usr/include -I/usr/local/include -std=gnu++0x -g -O2 -MT FileUtil.lo -MD -MP -MF .deps/FileUtil.Tpo -c FileUtil.cpp -o FileUtil.o >/dev/null 2>&1
+   make[2]: *** No rule to make target 'generate_fingerprint_tables', needed by 'FingerprintTables.cpp'。 停止。
+   make[2]: Leaving directory '/home/wdthome/folly/folly'
+   Makefile:1354: recipe for target 'all-recursive' failed
+   make[1]: *** [all-recursive] Error 1
+   make[1]: Leaving directory '/home/wdthome/folly/folly'
+   Makefile:863: recipe for target 'all' failed
+   make: *** [all] Error 2
+   
+   猜测是Makefile中有关generate_fingerprint_tables生成所依赖的文件路径设置问题，但查看MakeFile并没有发现错误。
+   
+   准备在mac上单独编译一遍folly，观察是否有问题。
+   
+   mac上编译通过了，主要碰到两个问题，
+   1）与cygwin上碰到的问题一样，./configure 需要加选项，主要修改的文件为./build/bootstrap-osx-homebrew.sh，修改如下所示：
+      
+    !/bin/bash -x
+     # The only prerequisite should be homebrew. If something doesn't work out of
+     # the box with just homebrew, let's fix it.
+   
+      # fail fast
+     set -e
+    
+     BASE_DIR="$(cd "$(dirname -- "$0")"/.. ; pwd)"  # folly/folly
+     cd "$BASE_DIR"
+  
+     brewget() {
+         brew install $@ || brew upgrade $@
+      }
+    
+    # tool dependencies: autotools and scons (for double-conversion)
+    brewget autoconf automake libtool
+    
+    # dependencies
+    brewget glog gflags boost libevent double-conversion
+    
+    autoreconf -i
+    ./configure CPPFLAGS="-I/usr/local/include" LDFLAGS="-L/usr/local/lib" LIBS="-lcrypto -ldl"
+    
+    #pushd test
+    #test -e gtest-1.7.0.zip || {
+    #    curl -O https://googletest.googlecode.com/files/gtest-1.7.0.zip
+    #    unzip gtest-1.7.0.zip
+    #}
+    #popd
+ 
+ 2）第二个问题就是在make过程中出现如下问题
+   In file included from ./folly/detail/CacheLocality.cpp:17:
+   ./folly/../folly/detail/CacheLocality.h:167:5: error: unknown type name 'pthread_t'; did you mean 'thread_t'?
+   pthread_t pid = pthread_self();
+   ^~~~~~~~~
+   thread_t
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include/mach/mach_types.h:119:22: note: 'thread_t' declared here
+typedef mach_port_t             thread_t;
+                               ^
+In file included from ./folly/detail/CacheLocality.cpp:17:
+./folly/../folly/detail/CacheLocality.h:167:21: error: use of undeclared identifier 'pthread_self'
+   pthread_t pid = pthread_self();
+                   ^
+  解决方法：	 missing #include <ptherad.h> in CacheLocality.h 
+          在CacheLocality.h中加入头文件pthread.h   
+
+ 
+ 
+ 

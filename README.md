@@ -1,0 +1,76 @@
+# Parallel Data Transfer (PDT)
+
+## Install Cygwin and apt-cyg
+You may download cygwin from [official website](http://cygwin.com/setup-x86.exe). And install packages one by one in the GUI if you prefer.
+
+However, a better way to install the dependencies packages is using [apt-cyg](../apt-cyg).
+To use `apt-cyg`, we must install `wget`, `tar`, `gawk`, `xz` and `bzip2` manually.
+Besides, to run the compiling script, we also need `git`, so install it too.
+
+
+## Scripts for compiling
+Run the following script in Cygwin, which will run the [`scripts/setup.sh`](scripts/setup.sh) to do the compiling work.
+``` shell
+git clone git@github.com:weinvent/pdt.git
+cd pdt
+sh scripts/setup.sh
+```
+
+# Compile with CLion
+[JetBrains CLion](http://jetbrains.com/clion) is a great cross platform IDE for C/C++ IDE.
+We could also use CLion to build and debug for WDT.
+
+1. Install CLion
+ - Set Cygwin, CMake, and GDB
+
+2. Open Project one by one
+ - ***double-conversion*** `-DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+ - ***gflags*** set environment variable `CXXFLAGS` to `-fPIC` and `-DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+ - ***glog*** `-DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+ - ***googletest*** `-DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+ - ***wdt*** `-DBUILD_TESTING=1 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+ 
+3. Add `make install` in CMakeLists.txt
+  ```
+  add_custom_target(install_${PROJECT_NAME}
+    make install
+    DEPENDS ${PROJECT_NAME}
+    COMMENT "Installing ${PROJECT_NAME}")
+  ```
+  Change `DEPENDS ${PROJECT_NAME}` if necessary.
+  
+4. Set cmake parameters in `File` -> `Settings` -> `Build, Execution, Deployment` -> `CMake` -> `CMake options`
+ - `-D CMAKE_INSTALL_PREFIX=C:\workspace\opt` where you want to install the package.
+
+# Test with real data
+***Receiver***:
+``` shell
+wdt.exe -directory /path/to/receiver/dir  -ipv4
+```
+***Sender***:
+``` shell
+wdt.exe -directory /path/to/sender/dir -connection_url "wdt://DESKTOP-OVBCDIB:55387?enc=2:a62c614a92d4fdcfe4a771d75f25774b&id=1589838237&num_ports=8&recpv=26"
+```
+
+# Issues
+ - [libglog_la-utilities Error on cygwin](https://github.com/google/glog/issues/44)
+ - [expected initializer before 'Demangle'](https://github.com/google/glog/issues/52)
+ - [Cygwin x86 and std::to_string](https://github.com/CleverRaven/Cataclysm-DDA/issues/13286)
+ - `C:/cygwin64/home/USER/workspace/pdt.build/wdt/build.dir/_bin/wdt/protocol_test.exe: error while loading shared libraries: cygwdt_min.dll: cannot open shared object file: No such file or directory`
+   * This can be solved by add `$INSTALL_PREFIX/lib` and `$INSTALL_PREFIX/bin` to `$PATH`
+
+# Failed Test Cases
+ - [WdtLockFailFast](https://github.com/facebook/wdt/blob/master/test/wdt_lock_failfast.sh) @huajianmao
+ - [WdtOverwriteTest](https://github.com/facebook/wdt/blob/master/test/wdt_overwrite_test.py) @huajianmao **Passed once**
+ - [WdtBadServerTest](https://github.com/facebook/wdt/blob/master/test/wdt_bad_server_test.py) @cornmoon-blue
+ - [WdtLongRunningTest](https://github.com/facebook/wdt/blob/master/test/wdt_long_running_test.py) @gfkdwr
+ - [TransferLogLockTest](https://github.com/facebook/wdt/blob/master/test/transfer_log_lock_test.sh) @huajianmao
+
+# References
+ - [Building and Installing HHVM on Cygwin](https://github.com/facebook/hhvm/wiki/Building-and-Installing-HHVM-on-Cygwin)
+ - [BUILD.md](https://github.com/facebook/wdt/blob/master/build/BUILD.md)
+ - [travis_linux.sh](https://github.com/facebook/wdt/blob/master/build/travis_linux.sh)
+ - [JIAsManual](./JIAsManual)
+ - [folly_compile](./folly_compile)
+ - [mac_wt](./mac_wt)
+

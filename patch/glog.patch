@@ -1,0 +1,81 @@
+diff --git a/Makefile.am b/Makefile.am
+index 3756465..13ccd0a 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -200,7 +200,7 @@ nodist_libglog_la_SOURCES = $(nodist_gloginclude_HEADERS)
+ 
+ libglog_la_CXXFLAGS = $(PTRHEAD_CFLAGS) $(GFLAGS_CFLAGS) $(MINGW_CFLAGS) \
+                       $(AM_CXXFLAGS) -DNDEBUG
+-libglog_la_LDFLAGS = $(PTRHEAD_CFLAGS) $(GFLAGS_LDFLAGS)
++libglog_la_LDFLAGS = $(PTRHEAD_CFLAGS) $(GFLAGS_LDFLAGS) -no-undefined
+ libglog_la_LIBADD = $(COMMON_LIBS)
+ 
+ ## The location of the windows project file for each binary we make
+diff --git a/Makefile.in b/Makefile.in
+index dde75f1..694afe4 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -895,7 +895,7 @@ nodist_libglog_la_SOURCES = $(nodist_gloginclude_HEADERS)
+ libglog_la_CXXFLAGS = $(PTRHEAD_CFLAGS) $(GFLAGS_CFLAGS) $(MINGW_CFLAGS) \
+                       $(AM_CXXFLAGS) -DNDEBUG
+ 
+-libglog_la_LDFLAGS = $(PTRHEAD_CFLAGS) $(GFLAGS_LDFLAGS)
++libglog_la_LDFLAGS = $(PTRHEAD_CFLAGS) $(GFLAGS_LDFLAGS) -no-undefined
+ libglog_la_LIBADD = $(COMMON_LIBS)
+ WINDOWS_PROJECTS = google-glog.sln vsprojects/libglog/libglog.vcproj \
+ 	vsprojects/logging_unittest/logging_unittest.vcproj \
+diff --git a/src/demangle_unittest.sh b/src/demangle_unittest.sh
+index 91deee2..c9df6af 100755
+--- a/src/demangle_unittest.sh
++++ b/src/demangle_unittest.sh
+@@ -41,7 +41,12 @@ die () {
+ }
+ 
+ BINDIR=".libs"
++if test `uname -o` != Cygwin
++then
+ LIBGLOG="$BINDIR/libglog.so"
++else
++LIBGLOG="$BINDIR/cygglog-0.dll"
++fi
+ 
+ DEMANGLER="$BINDIR/demangle_unittest"
+ 
+diff --git a/src/googletest.h b/src/googletest.h
+index b4677b2..bedde2c 100644
+--- a/src/googletest.h
++++ b/src/googletest.h
+@@ -521,7 +521,7 @@ class Thread {
+   virtual ~Thread() {}
+ 
+   void SetJoinable(bool) {}
+-#if defined(OS_WINDOWS) || defined(OS_CYGWIN)
++#if defined(OS_WINDOWS)
+   void Start() {
+     handle_ = CreateThread(NULL,
+                            0,
+@@ -554,7 +554,7 @@ class Thread {
+     return NULL;
+   }
+ 
+-#if defined(OS_WINDOWS) || defined(OS_CYGWIN)
++#if defined(OS_WINDOWS)
+   HANDLE handle_;
+   DWORD th_;
+ #else
+diff --git a/src/utilities.cc b/src/utilities.cc
+index 5c88e58..6e29acb 100644
+--- a/src/utilities.cc
++++ b/src/utilities.cc
+@@ -264,9 +264,9 @@ pid_t GetTID() {
+ #endif  // OS_LINUX || OS_MACOSX
+ 
+   // If gettid() could not be used, we use one of the following.
+-#if defined OS_LINUX
++#if defined OS_LINUX || defined OS_CYGWIN
+   return getpid();  // Linux:  getpid returns thread ID when gettid is absent
+-#elif defined OS_WINDOWS || defined OS_CYGWIN
++#elif defined OS_WINDOWS
+   return GetCurrentThreadId();
+ #else
+   // If none of the techniques above worked, we use pthread_self().
