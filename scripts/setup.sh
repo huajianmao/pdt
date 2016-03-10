@@ -75,8 +75,8 @@ if [ -z "${OS_NAME##*cygwin*}" ]; then
   cp /bin/cygcrypto-1.0.0.dll $WINDOWS_EXE_DIR/
   cp /bin/cygz.dll $WINDOWS_EXE_DIR/
 
-  cp $INSTALL_PREFIX/lib/cyggflags-2.dll $WINDOWS_EXE_DIR/
-  cp $INSTALL_PREFIX/bin/cygglog-0.3.4.dll $WINDOWS_EXE_DIR/
+  cp $INSTALL_PREFIX/lib/cyggflags-*.dll $WINDOWS_EXE_DIR/
+  cp $INSTALL_PREFIX/bin/cygglog-*.dll $WINDOWS_EXE_DIR/
   cp $INSTALL_PREFIX/bin/cygwdt_min.dll $WINDOWS_EXE_DIR/
   cp $INSTALL_PREFIX/bin/cygfolly4wdt.dll $WINDOWS_EXE_DIR/
   cp $INSTALL_PREFIX/bin/wdt.exe $WINDOWS_EXE_DIR/
