@@ -22,15 +22,18 @@ We could also use CLion to build and debug for WDT.
 
 1. Install CLion
  - Set Cygwin, CMake, and GDB
+  
+2. Set cmake parameters in `File` -> `Settings` -> `Build, Execution, Deployment` -> `CMake` -> `CMake options`
+ - ` -DBUILD_SHARED_LIBS=on -D CMAKE_INSTALL_PREFIX=C:\workspace\opt` where you want to install the package.
 
-2. Open Project one by one
- - ***double-conversion*** `-DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
- - ***gflags*** set environment variable `CXXFLAGS` to `-fPIC` and `-DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
- - ***glog*** `-DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
- - ***googletest*** `-DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
- - ***wdt*** `-DBUILD_TESTING=1 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+3. Open Project one by one
+ - ***double-conversion*** `-DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+ - ***gflags*** set environment variable `CXXFLAGS` to `-fPIC` and `-DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+ - ***glog*** `-DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+ - ***googletest*** `-DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+ - ***wdt*** set environment variable `PATH` to `C:\workspace\opt\bin;C:\workspace\opt\lib;$PATH`, `-DBUILD_TESTING=1 -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
  
-3. Add `make install` in CMakeLists.txt
+4. Add `make install` in CMakeLists.txt
   ```
   add_custom_target(install_${PROJECT_NAME}
     make install
@@ -38,9 +41,8 @@ We could also use CLion to build and debug for WDT.
     COMMENT "Installing ${PROJECT_NAME}")
   ```
   Change `DEPENDS ${PROJECT_NAME}` if necessary.
-  
-4. Set cmake parameters in `File` -> `Settings` -> `Build, Execution, Deployment` -> `CMake` -> `CMake options`
- - `-D CMAKE_INSTALL_PREFIX=C:\workspace\opt` where you want to install the package.
+
+5 . Copy all generated `*.dll.a` files in `C:\workspace\opt\lib` to `*.a`
 
 # Test with real data
 ***Receiver***:
