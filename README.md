@@ -56,6 +56,21 @@ wdt.exe -directory /path/to/sender/dir -connection_url "wdt://DESKTOP-OVBCDIB:55
 
 # Test results with real data
 
+***Environment***
+Terminal 1: MacBook Pro with VM running Windowes Server 2012, 100M/1000M network Adapter
+Terminal 2: Thinkpad S3 running Windows 10, with 100M/1000M network Adapter
+Network Condition: No router, connected with cable directly.
+Test Data: files of 64 Mbytes, 128 Mbytes, 256 MBytes, 512 Mbytes, etc. totally 4 GBytes.
+***Tests and Results***
+##Test 1: Windows 10 as Sender, Windows Server 2012 as Receiver, the throughtput is 59.6 Mbytes.
+##Test 2: Windows 10 as Sender, MAC system as Receiver, the throughtput is 52.4 Mbytes.
+##Test 3: MAC System as Sender, Windows 10 as Receiver, the throughtput is 76.6 Mbytes.
+##Test 4: MAC System as Sender, Linux system as Receiver, the throughtput is 100.6 Mbytes.
+##Test 5: Linux system as Sender, MAC system as Receiver, the throughtput is 66.45 Mbytes.
+##Test 6: Linux system as Sender, Windows Server 2012 as Receiver, the throughtput is 62.8 Mbytes.
+##Test 7: Windows Server 2012 as Sender, Linux system as Receiver, the throughtput is 48.0 Mbytes.
+
+
 # Issues
  - [libglog_la-utilities Error on cygwin](https://github.com/google/glog/issues/44)
  - [expected initializer before 'Demangle'](https://github.com/google/glog/issues/52)
