@@ -44,7 +44,7 @@ We could also use CLion to build and debug for WDT.
 
 5 . Copy all generated `*.dll.a` files in `C:\workspace\opt\lib` to `*.a`
 
-# Test with real data
+# How to Use
 ***Receiver***:
 ``` shell
 wdt.exe -directory /path/to/receiver/dir  -ipv4
@@ -53,6 +53,8 @@ wdt.exe -directory /path/to/receiver/dir  -ipv4
 ``` shell
 wdt.exe -directory /path/to/sender/dir -connection_url "wdt://DESKTOP-OVBCDIB:55387?enc=2:a62c614a92d4fdcfe4a771d75f25774b&id=1589838237&num_ports=8&recpv=26"
 ```
+
+# Test results with real data
 
 # Issues
  - [libglog_la-utilities Error on cygwin](https://github.com/google/glog/issues/44)
