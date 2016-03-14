@@ -44,7 +44,7 @@ We could also use CLion to build and debug for WDT.
 
 5 . Copy all generated `*.dll.a` files in `C:\workspace\opt\lib` to `*.a`
 
-# Test with real data
+# How to Use
 ***Receiver***:
 ``` shell
 wdt.exe -directory /path/to/receiver/dir  -ipv4
@@ -53,6 +53,25 @@ wdt.exe -directory /path/to/receiver/dir  -ipv4
 ``` shell
 wdt.exe -directory /path/to/sender/dir -connection_url "wdt://DESKTOP-OVBCDIB:55387?enc=2:a62c614a92d4fdcfe4a771d75f25774b&id=1589838237&num_ports=8&recpv=26"
 ```
+
+# Test results with real data
+
+***Environment***
+Terminal 1: MacBook Pro with VM running Windowes Server 2012, 100M/1000M network Adapter
+Terminal 2: Thinkpad S3 running Windows 10, with 100M/1000M network Adapter
+Network Condition: No router, connected with cable directly.
+Test Data: files of 64 Mbytes, 128 Mbytes, 256 MBytes, 512 Mbytes, etc. totally 4 GBytes.
+***Tests and Results***
+- Test 1: Windows 10 as Sender, Windows Server 2012 as Receiver, the throughtput is 59.6 Mbytes.
+- Test 2: Windows 10 as Sender, MAC system as Receiver, the throughtput is 52.4 Mbytes.
+- Test 3: MAC System as Sender, Windows 10 as Receiver, the throughtput is 76.6 Mbytes.
+- Test 4: MAC System as Sender, Linux system as Receiver, the throughtput is 100.6 Mbytes.
+- Test 5: Linux system as Sender, MAC system as Receiver, the throughtput is 66.45 Mbytes.
+- Test 6: Linux system as Sender, Windows Server 2012 as Receiver, the throughtput is 62.8 Mbytes.
+- Test 7: Windows Server 2012 as Sender, Linux system as Receiver, the throughtput is 48.0 Mbytes.
+
+- Test 8: Thinkpad S3 and Surface Pro 3, 300 M wireless router, throughput 4.8 MBytes.
+
 
 # Issues
  - [libglog_la-utilities Error on cygwin](https://github.com/google/glog/issues/44)
