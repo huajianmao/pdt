@@ -35,12 +35,16 @@ OutFile "PDTSetup.exe"
 Section "setup"
   SetOutPath $INSTDIR
   File /r bin
+  File /r doc 
+  File /r openssh
 
   Call SetEnvironmentVariables
   Var /Global TempExePath
   StrCpy $TempExePath "$INSTDIR"
   System::Call 'kernel32::SetEnvironmentVariable(t "PDT_HOME", t "$TempExePath")i'
   
+  Call InstallOpenSSHService
+
   WriteUninstaller "$INSTDIR\uninstall.exe"
   CreateDirectory "$SMPROGRAMS\${APP_NAME}"
   CreateShortCut "$SMPROGRAMS\${APP_NAME}\Start.${APP_NAME}.lnk" "$INSTDIR\start.exe"
@@ -48,10 +52,26 @@ Section "setup"
 SectionEnd
 
 Section "Uninstall"
+  Call un.RemoveOpenSSHService
   Call un.RemoveEnvironmentVariables
   RMDir /r $INSTDIR
   RMDir /r "$SMPROGRAMS\${APP_NAME}"
 SectionEnd
+
+Function InstallOpenSSHService
+  SetOutPath "$INSTDIR\openssh"
+  ExecWait "ssh-keygen.exe -A"
+  ExecWait "powershell.exe install-sshlsa.ps1"
+  ExecWait "sshd.exe install"
+  ExecWait "sc config sshd start=auto"
+  ExecWait "net start sshd"
+FunctionEnd
+Function un.RemoveOpenSSHService
+  SetOutPath "$INSTDIR\openssh"
+  ExecWait "net stop sshd"
+  ExecWait "sshd.exe uninstall"
+  ExecWait "powershell uninstall-sshlsa.ps1"
+FunctionEnd
 
 Function SetEnvironmentVariables
   Push PDT_HOME
@@ -60,7 +80,6 @@ Function SetEnvironmentVariables
   Push ${PDT_HOME}\bin
   Call AddToPath
 FunctionEnd
-
 Function un.RemoveEnvironmentVariables
   Push PDT_HOME
   Call un.DeleteEnvStr
