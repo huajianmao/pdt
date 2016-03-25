@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 VERSION=1.0.alpha
 DST_DIR=/tmp/pdt/pack
@@ -23,7 +23,6 @@ cp patch/wdt.patch $RELEASE_DIR/patch/wdt.patch
 cp patch/glog.patch $RELEASE_DIR/patch/glog.patch
 
 cp scripts/setup.sh $RELEASE_DIR/scripts/setup.sh
-cp scripts/setup.local.sh $RELEASE_DIR/scripts/setup.local.sh
 
 cd $RELEASE_DIR/src
 git clone https://github.com/google/double-conversion
