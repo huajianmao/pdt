@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=1.0.alpha
+VERSION=1.0.alpha.1
 DST_DIR=/tmp/pdt/pack
 CURRENT_DIR=`pwd`
 
@@ -79,4 +79,10 @@ if [ -z "${OS_NAME##*cygwin*}" ]; then
   cp $INSTALL_PREFIX/bin/wdt.exe $WINDOWS_EXE_DIR/
 fi
 
+cd $DST_DIR/release/
+tar zcf pdt-$VERSION.tar.gz $VERSION
+
 cd $CURRENT_DIR
+RELEASE_FILE=$DST_DIR/release/pdt-$VERSION.tar.gz
+echo "The generated package is [$RELEASE_FILE]"
+ls -l $RELEASE_FILE
