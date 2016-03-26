@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <title>编译安装文档</title>
+      <style>.markdown-preview:not([data-use-github-style]) { padding: 2em; font-size: 1.2em; color: rgb(56, 58, 66); overflow: auto; background-color: rgb(250, 250, 250); }
+.markdown-preview:not([data-use-github-style]) > :first-child { margin-top: 0px; }
+.markdown-preview:not([data-use-github-style]) h1, .markdown-preview:not([data-use-github-style]) h2, .markdown-preview:not([data-use-github-style]) h3, .markdown-preview:not([data-use-github-style]) h4, .markdown-preview:not([data-use-github-style]) h5, .markdown-preview:not([data-use-github-style]) h6 { line-height: 1.2; margin-top: 1.5em; margin-bottom: 0.5em; color: rgb(0, 0, 0); }
+.markdown-preview:not([data-use-github-style]) h1 { font-size: 2.4em; font-weight: 300; }
+.markdown-preview:not([data-use-github-style]) h2 { font-size: 1.8em; font-weight: 400; }
+.markdown-preview:not([data-use-github-style]) h3 { font-size: 1.5em; font-weight: 500; }
+.markdown-preview:not([data-use-github-style]) h4 { font-size: 1.2em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) h5 { font-size: 1.1em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) h6 { font-size: 1em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) strong { color: rgb(0, 0, 0); }
+.markdown-preview:not([data-use-github-style]) del { color: rgb(94, 97, 110); }
+.markdown-preview:not([data-use-github-style]) a, .markdown-preview:not([data-use-github-style]) a code { color: rgb(82, 111, 255); }
+.markdown-preview:not([data-use-github-style]) img { max-width: 100%; }
+.markdown-preview:not([data-use-github-style]) > p { margin-top: 0px; margin-bottom: 1.5em; }
+.markdown-preview:not([data-use-github-style]) > ul, .markdown-preview:not([data-use-github-style]) > ol { margin-bottom: 1.5em; }
+.markdown-preview:not([data-use-github-style]) blockquote { margin: 1.5em 0px; font-size: inherit; color: rgb(94, 97, 110); border-color: rgb(209, 209, 210); border-width: 4px; }
+.markdown-preview:not([data-use-github-style]) hr { margin: 3em 0px; border-top-width: 2px; border-top-style: dashed; border-top-color: rgb(209, 209, 210); background: none; }
+.markdown-preview:not([data-use-github-style]) table { margin: 1.5em 0px; }
+.markdown-preview:not([data-use-github-style]) th { color: rgb(0, 0, 0); }
+.markdown-preview:not([data-use-github-style]) th, .markdown-preview:not([data-use-github-style]) td { padding: 0.66em 1em; border: 1px solid rgb(209, 209, 210); }
+.markdown-preview:not([data-use-github-style]) code { color: rgb(0, 0, 0); background-color: rgb(234, 234, 235); }
+.markdown-preview:not([data-use-github-style]) pre.editor-colors { margin: 1.5em 0px; padding: 1em; font-size: 0.92em; border-radius: 3px; background-color: rgb(240, 240, 240); }
+.markdown-preview:not([data-use-github-style]) kbd { color: rgb(0, 0, 0); border-width: 1px 1px 2px; border-style: solid; border-color: rgb(209, 209, 210) rgb(209, 209, 210) rgb(193, 193, 194); background-color: rgb(234, 234, 235); }
+.markdown-preview[data-use-github-style] { font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif; line-height: 1.6; word-wrap: break-word; padding: 30px; font-size: 16px; color: rgb(51, 51, 51); overflow: scroll; background-color: rgb(255, 255, 255); }
+.markdown-preview[data-use-github-style] > :first-child { margin-top: 0px !important; }
+.markdown-preview[data-use-github-style] > :last-child { margin-bottom: 0px !important; }
+.markdown-preview[data-use-github-style] a:not([href]) { color: inherit; text-decoration: none; }
+.markdown-preview[data-use-github-style] .absent { color: rgb(204, 0, 0); }
+.markdown-preview[data-use-github-style] .anchor { position: absolute; top: 0px; left: 0px; display: block; padding-right: 6px; padding-left: 30px; margin-left: -30px; }
+.markdown-preview[data-use-github-style] .anchor:focus { outline: none; }
+.markdown-preview[data-use-github-style] h1, .markdown-preview[data-use-github-style] h2, .markdown-preview[data-use-github-style] h3, .markdown-preview[data-use-github-style] h4, .markdown-preview[data-use-github-style] h5, .markdown-preview[data-use-github-style] h6 { position: relative; margin-top: 1em; margin-bottom: 16px; font-weight: bold; line-height: 1.4; }
+.markdown-preview[data-use-github-style] h1 .octicon-link, .markdown-preview[data-use-github-style] h2 .octicon-link, .markdown-preview[data-use-github-style] h3 .octicon-link, .markdown-preview[data-use-github-style] h4 .octicon-link, .markdown-preview[data-use-github-style] h5 .octicon-link, .markdown-preview[data-use-github-style] h6 .octicon-link { display: none; color: rgb(0, 0, 0); vertical-align: middle; }
+.markdown-preview[data-use-github-style] h1:hover .anchor, .markdown-preview[data-use-github-style] h2:hover .anchor, .markdown-preview[data-use-github-style] h3:hover .anchor, .markdown-preview[data-use-github-style] h4:hover .anchor, .markdown-preview[data-use-github-style] h5:hover .anchor, .markdown-preview[data-use-github-style] h6:hover .anchor { padding-left: 8px; margin-left: -30px; text-decoration: none; }
+.markdown-preview[data-use-github-style] h1:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h2:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h3:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h4:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h5:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h6:hover .anchor .octicon-link { display: inline-block; }
+.markdown-preview[data-use-github-style] h1 tt, .markdown-preview[data-use-github-style] h2 tt, .markdown-preview[data-use-github-style] h3 tt, .markdown-preview[data-use-github-style] h4 tt, .markdown-preview[data-use-github-style] h5 tt, .markdown-preview[data-use-github-style] h6 tt, .markdown-preview[data-use-github-style] h1 code, .markdown-preview[data-use-github-style] h2 code, .markdown-preview[data-use-github-style] h3 code, .markdown-preview[data-use-github-style] h4 code, .markdown-preview[data-use-github-style] h5 code, .markdown-preview[data-use-github-style] h6 code { font-size: inherit; }
+.markdown-preview[data-use-github-style] h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(238, 238, 238); }
+.markdown-preview[data-use-github-style] h1 .anchor { line-height: 1; }
+.markdown-preview[data-use-github-style] h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(238, 238, 238); }
+.markdown-preview[data-use-github-style] h2 .anchor { line-height: 1; }
+.markdown-preview[data-use-github-style] h3 { font-size: 1.5em; line-height: 1.43; }
+.markdown-preview[data-use-github-style] h3 .anchor { line-height: 1.2; }
+.markdown-preview[data-use-github-style] h4 { font-size: 1.25em; }
+.markdown-preview[data-use-github-style] h4 .anchor { line-height: 1.2; }
+.markdown-preview[data-use-github-style] h5 { font-size: 1em; }
+.markdown-preview[data-use-github-style] h5 .anchor { line-height: 1.1; }
+.markdown-preview[data-use-github-style] h6 { font-size: 1em; color: rgb(119, 119, 119); }
+.markdown-preview[data-use-github-style] h6 .anchor { line-height: 1.1; }
+.markdown-preview[data-use-github-style] p, .markdown-preview[data-use-github-style] blockquote, .markdown-preview[data-use-github-style] ul, .markdown-preview[data-use-github-style] ol, .markdown-preview[data-use-github-style] dl, .markdown-preview[data-use-github-style] table, .markdown-preview[data-use-github-style] pre { margin-top: 0px; margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] hr { height: 4px; padding: 0px; margin: 16px 0px; border: 0px none; background-color: rgb(231, 231, 231); }
+.markdown-preview[data-use-github-style] ul, .markdown-preview[data-use-github-style] ol { padding-left: 2em; }
+.markdown-preview[data-use-github-style] ul.no-list, .markdown-preview[data-use-github-style] ol.no-list { padding: 0px; list-style-type: none; }
+.markdown-preview[data-use-github-style] ul ul, .markdown-preview[data-use-github-style] ul ol, .markdown-preview[data-use-github-style] ol ol, .markdown-preview[data-use-github-style] ol ul { margin-top: 0px; margin-bottom: 0px; }
+.markdown-preview[data-use-github-style] li > p { margin-top: 16px; }
+.markdown-preview[data-use-github-style] dl { padding: 0px; }
+.markdown-preview[data-use-github-style] dl dt { padding: 0px; margin-top: 16px; font-size: 1em; font-style: italic; font-weight: bold; }
+.markdown-preview[data-use-github-style] dl dd { padding: 0px 16px; margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] blockquote { padding: 0px 15px; color: rgb(119, 119, 119); border-left-width: 4px; border-left-style: solid; border-left-color: rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] blockquote > :first-child { margin-top: 0px; }
+.markdown-preview[data-use-github-style] blockquote > :last-child { margin-bottom: 0px; }
+.markdown-preview[data-use-github-style] table { display: block; width: 100%; overflow: auto; word-break: keep-all; }
+.markdown-preview[data-use-github-style] table th { font-weight: bold; }
+.markdown-preview[data-use-github-style] table th, .markdown-preview[data-use-github-style] table td { padding: 6px 13px; border: 1px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] table tr { border-top-width: 1px; border-top-style: solid; border-top-color: rgb(204, 204, 204); background-color: rgb(255, 255, 255); }
+.markdown-preview[data-use-github-style] table tr:nth-child(2n) { background-color: rgb(248, 248, 248); }
+.markdown-preview[data-use-github-style] img { max-width: 100%; box-sizing: border-box; }
+.markdown-preview[data-use-github-style] .emoji { max-width: none; }
+.markdown-preview[data-use-github-style] span.frame { display: block; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.frame > span { display: block; float: left; width: auto; padding: 7px; margin: 13px 0px 0px; overflow: hidden; border: 1px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] span.frame span img { display: block; float: left; }
+.markdown-preview[data-use-github-style] span.frame span span { display: block; padding: 5px 0px 0px; clear: both; color: rgb(51, 51, 51); }
+.markdown-preview[data-use-github-style] span.align-center { display: block; overflow: hidden; clear: both; }
+.markdown-preview[data-use-github-style] span.align-center > span { display: block; margin: 13px auto 0px; overflow: hidden; text-align: center; }
+.markdown-preview[data-use-github-style] span.align-center span img { margin: 0px auto; text-align: center; }
+.markdown-preview[data-use-github-style] span.align-right { display: block; overflow: hidden; clear: both; }
+.markdown-preview[data-use-github-style] span.align-right > span { display: block; margin: 13px 0px 0px; overflow: hidden; text-align: right; }
+.markdown-preview[data-use-github-style] span.align-right span img { margin: 0px; text-align: right; }
+.markdown-preview[data-use-github-style] span.float-left { display: block; float: left; margin-right: 13px; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.float-left span { margin: 13px 0px 0px; }
+.markdown-preview[data-use-github-style] span.float-right { display: block; float: right; margin-left: 13px; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.float-right > span { display: block; margin: 13px auto 0px; overflow: hidden; text-align: right; }
+.markdown-preview[data-use-github-style] code, .markdown-preview[data-use-github-style] tt { padding: 0.2em 0px; margin: 0px; font-size: 85%; border-radius: 3px; background-color: rgba(0, 0, 0, 0.0392157); }
+.markdown-preview[data-use-github-style] code::before, .markdown-preview[data-use-github-style] tt::before, .markdown-preview[data-use-github-style] code::after, .markdown-preview[data-use-github-style] tt::after { letter-spacing: -0.2em; content: " "; }
+.markdown-preview[data-use-github-style] code br, .markdown-preview[data-use-github-style] tt br { display: none; }
+.markdown-preview[data-use-github-style] del code { text-decoration: inherit; }
+.markdown-preview[data-use-github-style] pre > code { padding: 0px; margin: 0px; font-size: 100%; word-break: normal; white-space: pre; border: 0px; background: transparent; }
+.markdown-preview[data-use-github-style] .highlight { margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] .highlight pre, .markdown-preview[data-use-github-style] pre { padding: 16px; overflow: auto; font-size: 85%; line-height: 1.45; border-radius: 3px; background-color: rgb(247, 247, 247); }
+.markdown-preview[data-use-github-style] .highlight pre { margin-bottom: 0px; word-break: normal; }
+.markdown-preview[data-use-github-style] pre { word-wrap: normal; }
+.markdown-preview[data-use-github-style] pre code, .markdown-preview[data-use-github-style] pre tt { display: inline; max-width: initial; padding: 0px; margin: 0px; overflow: initial; line-height: inherit; word-wrap: normal; border: 0px; background-color: transparent; }
+.markdown-preview[data-use-github-style] pre code::before, .markdown-preview[data-use-github-style] pre tt::before, .markdown-preview[data-use-github-style] pre code::after, .markdown-preview[data-use-github-style] pre tt::after { content: normal; }
+.markdown-preview[data-use-github-style] kbd { display: inline-block; padding: 3px 5px; font-size: 11px; line-height: 10px; color: rgb(85, 85, 85); vertical-align: middle; border-style: solid; border-width: 1px; border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(187, 187, 187); border-radius: 3px; box-shadow: rgb(187, 187, 187) 0px -1px 0px inset; background-color: rgb(252, 252, 252); }
+.markdown-preview[data-use-github-style] a { color: rgb(51, 122, 183); }
+.markdown-preview[data-use-github-style] code { color: inherit; }
+.markdown-preview[data-use-github-style] pre.editor-colors { padding: 0.8em 1em; margin-bottom: 1em; font-size: 0.85em; border-radius: 4px; overflow: auto; }
+.scrollbars-visible-always .markdown-preview pre.editor-colors::shadow .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors::shadow .horizontal-scrollbar { visibility: hidden; }
+.scrollbars-visible-always .markdown-preview pre.editor-colors:hover::shadow .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors:hover::shadow .horizontal-scrollbar { visibility: visible; }
+.markdown-themeable-pdf-page-break {
+  border-top: 2px dotted #0098ff;
+}
+.markdown-themeable-pdf-page-break span {
+  opacity: .35;
+}
+
+.bracket-matcher .region {
+  border-bottom: 1px dotted lime;
+  position: absolute;
+}
+
+.spell-check-misspelling .region {
+  border-bottom: 2px dotted rgba(255, 51, 51, 0.75);
+}
+
+pre.editor-colors,
+.host {
+  background-color: #fafafa;
+  color: #383a42;
+}
+pre.editor-colors .line.cursor-line,
+.host .line.cursor-line {
+  background-color: rgba(56, 58, 66, 0.04);
+}
+pre.editor-colors .invisible,
+.host .invisible {
+  color: #383a42;
+}
+pre.editor-colors .cursor,
+.host .cursor {
+  border-left: 2px solid #526fff;
+}
+pre.editor-colors .selection .region,
+.host .selection .region {
+  background-color: #ededed;
+}
+pre.editor-colors .bracket-matcher .region,
+.host .bracket-matcher .region {
+  border-bottom: 1px solid #526fff;
+  box-sizing: border-box;
+}
+pre.editor-colors .invisible-character,
+.host .invisible-character {
+  color: rgba(56, 58, 66, 0.2);
+}
+pre.editor-colors .indent-guide,
+.host .indent-guide {
+  color: rgba(56, 58, 66, 0.2);
+}
+pre.editor-colors .wrap-guide,
+.host .wrap-guide {
+  background-color: rgba(56, 58, 66, 0.2);
+}
+pre.editor-colors .gutter .line-number,
+.host .gutter .line-number {
+  color: #9d9d9f;
+  -webkit-font-smoothing: antialiased;
+}
+pre.editor-colors .gutter .line-number.cursor-line,
+.host .gutter .line-number.cursor-line {
+  color: #4d5375;
+  background-color: #f2f2f2;
+}
+pre.editor-colors .gutter .line-number.cursor-line-no-selection,
+.host .gutter .line-number.cursor-line-no-selection {
+  background-color: transparent;
+}
+pre.editor-colors .gutter .line-number .icon-right,
+.host .gutter .line-number .icon-right {
+  color: #383a42;
+}
+pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed.git-line-removed::before,
+.host .gutter:not(.git-diff-icon) .line-number.git-line-removed.git-line-removed::before {
+  bottom: -3px;
+}
+pre.editor-colors .gutter:not(.git-diff-icon) .line-number.git-line-removed::after,
+.host .gutter:not(.git-diff-icon) .line-number.git-line-removed::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 25px;
+  border-bottom: 1px dotted rgba(255, 20, 20, 0.5);
+  pointer-events: none;
+}
+pre.editor-colors .gutter .line-number.folded,
+.host .gutter .line-number.folded,
+pre.editor-colors .gutter .line-number:after,
+.host .gutter .line-number:after,
+pre.editor-colors .fold-marker:after,
+.host .fold-marker:after {
+  color: #4d5375;
+}
+.comment {
+  color: #a0a1a7;
+  font-style: italic;
+}
+.entity.name.type {
+  color: #c18401;
+}
+.entity.other.inherited-class {
+  color: #50a14f;
+}
+.keyword {
+  color: #a626a4;
+}
+.keyword.control {
+  color: #a626a4;
+}
+.keyword.operator {
+  color: #383a42;
+}
+.keyword.other.special-method {
+  color: #4078f2;
+}
+.keyword.other.unit {
+  color: #986801;
+}
+.storage {
+  color: #a626a4;
+}
+.storage.type.annotation,
+.storage.type.primitive {
+  color: #a626a4;
+}
+.storage.modifier.package,
+.storage.modifier.import {
+  color: #383a42;
+}
+.constant {
+  color: #986801;
+}
+.constant.variable {
+  color: #986801;
+}
+.constant.character.escape {
+  color: #0184bc;
+}
+.constant.numeric {
+  color: #986801;
+}
+.constant.other.color {
+  color: #0184bc;
+}
+.constant.other.symbol {
+  color: #0184bc;
+}
+.variable {
+  color: #e45649;
+}
+.variable.interpolation {
+  color: #ca1243;
+}
+.variable.parameter {
+  color: #383a42;
+}
+.string {
+  color: #50a14f;
+}
+.string.regexp {
+  color: #0184bc;
+}
+.string.regexp .source.ruby.embedded {
+  color: #c18401;
+}
+.string.other.link {
+  color: #e45649;
+}
+.punctuation.definition.comment {
+  color: #a0a1a7;
+}
+.punctuation.definition.method-parameters,
+.punctuation.definition.function-parameters,
+.punctuation.definition.parameters,
+.punctuation.definition.separator,
+.punctuation.definition.seperator,
+.punctuation.definition.array {
+  color: #383a42;
+}
+.punctuation.definition.heading,
+.punctuation.definition.identity {
+  color: #4078f2;
+}
+.punctuation.definition.bold {
+  color: #c18401;
+  font-weight: bold;
+}
+.punctuation.definition.italic {
+  color: #a626a4;
+  font-style: italic;
+}
+.punctuation.section.embedded {
+  color: #ca1243;
+}
+.punctuation.section.method,
+.punctuation.section.class,
+.punctuation.section.inner-class {
+  color: #383a42;
+}
+.support.class {
+  color: #c18401;
+}
+.support.type {
+  color: #0184bc;
+}
+.support.function {
+  color: #0184bc;
+}
+.support.function.any-method {
+  color: #4078f2;
+}
+.entity.name.function {
+  color: #4078f2;
+}
+.entity.name.class,
+.entity.name.type.class {
+  color: #c18401;
+}
+.entity.name.section {
+  color: #4078f2;
+}
+.entity.name.tag {
+  color: #e45649;
+}
+.entity.other.attribute-name {
+  color: #986801;
+}
+.entity.other.attribute-name.id {
+  color: #4078f2;
+}
+.meta.class {
+  color: #c18401;
+}
+.meta.class.body {
+  color: #383a42;
+}
+.meta.method-call,
+.meta.method {
+  color: #383a42;
+}
+.meta.definition.variable {
+  color: #e45649;
+}
+.meta.link {
+  color: #986801;
+}
+.meta.require {
+  color: #4078f2;
+}
+.meta.selector {
+  color: #a626a4;
+}
+.meta.separator {
+  background-color: #373b41;
+  color: #383a42;
+}
+.meta.tag {
+  color: #383a42;
+}
+.none {
+  color: #383a42;
+}
+.invalid.deprecated {
+  color: #000000 !important;
+  background-color: #f2a60d !important;
+}
+.invalid.illegal {
+  color: #ffffff !important;
+  background-color: #ff1414 !important;
+}
+.markup.bold {
+  color: #986801;
+  font-weight: bold;
+}
+.markup.changed {
+  color: #a626a4;
+}
+.markup.deleted {
+  color: #e45649;
+}
+.markup.italic {
+  color: #a626a4;
+  font-style: italic;
+}
+.markup.heading .punctuation.definition.heading {
+  color: #4078f2;
+}
+.markup.inserted {
+  color: #50a14f;
+}
+.markup.list {
+  color: #e45649;
+}
+.markup.quote {
+  color: #986801;
+}
+.markup.raw {
+  color: #50a14f;
+}
+.source.cs .keyword.operator {
+  color: #a626a4;
+}
+.source.css .property-name,
+.source.css .property-value {
+  color: #696c77;
+}
+.source.css .property-name.support,
+.source.css .property-value.support {
+  color: #383a42;
+}
+.source.gfm .markup {
+  -webkit-font-smoothing: auto;
+}
+.source.gfm .markup.heading {
+  color: #e45649;
+}
+.source.gfm .markup.link {
+  color: #a626a4;
+}
+.source.gfm .link .entity {
+  color: #4078f2;
+}
+.source.ini .keyword.other.definition.ini {
+  color: #e45649;
+}
+.source.java .storage.modifier.import {
+  color: #c18401;
+}
+.source.java .storage.type {
+  color: #c18401;
+}
+.source.java-properties .meta.key-pair {
+  color: #e45649;
+}
+.source.java-properties .meta.key-pair > .punctuation {
+  color: #383a42;
+}
+.source.json .meta.structure.dictionary.json > .string.quoted.json {
+  color: #e45649;
+}
+.source.json .meta.structure.dictionary.json > .string.quoted.json > .punctuation.string {
+  color: #e45649;
+}
+.source.json .meta.structure.dictionary.json > .value.json > .string.quoted.json,
+.source.json .meta.structure.array.json > .value.json > .string.quoted.json,
+.source.json .meta.structure.dictionary.json > .value.json > .string.quoted.json > .punctuation,
+.source.json .meta.structure.array.json > .value.json > .string.quoted.json > .punctuation {
+  color: #50a14f;
+}
+.source.json .meta.structure.dictionary.json > .constant.language.json,
+.source.json .meta.structure.array.json > .constant.language.json {
+  color: #0184bc;
+}
+.source.ruby .constant.other.symbol > .punctuation {
+  color: inherit;
+}
+.source.python .keyword.operator.logical.python {
+  color: #a626a4;
+}
+.source.python .variable.parameter {
+  color: #986801;
+}
+</style>
+  </head>
+  <body class='markdown-preview'><h1 id="parallel-data-transfer-pdt-">Parallel Data Transfer (PDT)</h1>
+<p>PDT是基于<a href="https://github.com/facebook/wdt">WDT</a>专门为Windows平台定制编译而成的数据传输工具。
+PDT通过在Cygwin环境下对<a href="https://github.com/facebook/wdt">WDT</a>进行编译，并提取编译生成的二进制文件及其依赖的cygwin库，
+从而形成Windows环境下可独立运行的PDT数据传输软件包。</p>
+<p>由于<a href="https://github.com/facebook/wdt">WDT</a>依赖于<a href="https://github.com/google/double-conversion">double-conversion</a>,
+<a href="https://github.com/gflags/gflags">gflags</a>, <a href="https://github.com/google/glog">glog</a>,
+<a href="https://github.com/google/googletest">googletest</a>, <a href="https://github.com/facebook/folly">folly</a>
+等软件库，因此在编译<a href="https://github.com/facebook/wdt">WDT</a>需要正确编译安装这些软件库。</p>
+<p>另外，如上文所述，PDT是在Cygwin环境下进行编译的，因此，若要从零完整编译PDT，则需要安装Cygwin环境。
+但若仅运行PDT，则无需安装Cygwin环境。</p>
+<p>PDT的编译安装过程主要包括以下几个步骤，或者直接<code>sh scripts/setup.sh</code>调用代码包中的中的编译脚本，完成整个代码编译过程：</p>
+<h2 id="-cygwin-x64-">一、安装Cygwin X64 环境</h2>
+<p>Cygwin安装文件可以从<a href="http://cygwin.com/setup-x86_64.exe">它的官网</a>下载得到。运行Cygwin的安装程序即可完成Cygwin的安装。
+由于<a href="https://github.com/facebook/wdt">WDT</a>的编译过程依赖一些第三方库，因此需要将这些第三方库在Cygwin环境中正确安装。
+WDT编译过程所依赖的第三方库主要包括：</p>
+<ul>
+<li>gcc-g++</li>
+<li>cmake</li>
+<li>make</li>
+<li>automake1.14</li>
+<li>autoconf-archive</li>
+<li>autoconf2.5</li>
+<li>gdb</li>
+<li>git</li>
+<li>openssh</li>
+<li>openssl-devel</li>
+<li>pkg-config</li>
+<li>patch</li>
+<li>libboost-devel</li>
+<li>libtool</li>
+</ul>
+<h3 id="1-1-">1.1 第三方库安装的方法主要有两种</h3>
+<ul>
+<li><p>1) 通过使用<a href="../apt-cyg">apt-cyg</a>脚本，批量安装所需的软件包。
+由于apt-cyg脚本本身依赖于<code>wget</code>, <code>tar</code>, <code>gawk</code>, <code>xz</code>以及<code>bzip2</code>等软件，
+我们需要在执行Cygwin安装程序时，手动选择安装这几个软件包。
+ 然后执行以下脚本批量安装pdt所需工具和第三方库：</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span>&nbsp;</span><span class="meta paragraph text"><span>apt-cyg&nbsp;install&nbsp;-m&nbsp;</span><span class="markup underline link http hyperlink"><span>http://mirrors.aliyun.com/cygwin</span></span><span>&nbsp;\</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;&nbsp;</span><span class="meta paragraph text"><span>gcc-g++&nbsp;cmake&nbsp;make&nbsp;automake1.14&nbsp;autoconf-archive&nbsp;autoconf2.5&nbsp;gdb&nbsp;openssh&nbsp;openssl-devel\</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;&nbsp;pkg-config&nbsp;patch&nbsp;libboost-devel&nbsp;libtool</span></span></span></div></pre></li>
+<li><p>2) 另一种方法是，重新执行Cygwin安装程序，随后逐个根据软件包名，搜索对应软件并选择安装。</p>
+</li>
+</ul>
+<h2 id="-">二、下载依赖源码</h2>
+<p>PDT主要依赖<a href="https://github.com/google/double-conversion">double-conversion</a>,
+<a href="https://github.com/gflags/gflags">gflags</a>, <a href="https://github.com/google/glog">glog</a>,
+<a href="https://github.com/google/googletest">googletest</a>, <a href="https://github.com/facebook/folly">folly</a>, <a href="https://github.com/facebook/wdt">wdt</a>等软件。
+可以在Cygwin环境中，通过git分别下载相应代码文件。
+WDT目前仅支持Linux、MacOSX环境，若要在Cygwin下正确运行，需对其进行打补丁，主要依赖于两个补丁文件<a href="../patch/glog.patch">Patch for glog</a>, <a href="../patch/wdt.patch">Patch for wdt</a>。
+具体过程如下：</p>
+<ul>
+<li><p>1) 在Cygwin环境中，建立放置代码的文件夹，并设置环境变量</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>WORKSPACE=~/workspace/pdt;&nbsp;mkdir&nbsp;-p&nbsp;$WORKSPACE;&nbsp;mkdir&nbsp;-p&nbsp;$WORKSPACE/src;&nbsp;mkdir&nbsp;-p&nbsp;$WORKSPACE/patch;&nbsp;cd&nbsp;$WORKSPACE</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;</span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>export&nbsp;INSTALL_PREFIX=/tmp/pdt</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>mkdir&nbsp;-p&nbsp;$INSTALL_PREFIX/bin&nbsp;$INSTALL_PREFIX/lib</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>export&nbsp;PATH=$INSTALL_PREFIX/bin:$INSTALL_PREFIX/lib:$PATH</span></span></span></div></pre></li>
+<li><p>2) 通过git下载所需软件包</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>cd&nbsp;$WORKSPACE/src</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>git&nbsp;clone&nbsp;</span><span class="markup underline link https hyperlink"><span>https://github.com/google/double-conversion</span></span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>git&nbsp;clone&nbsp;</span><span class="markup underline link https hyperlink"><span>https://github.com/gflags/gflags</span></span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>git&nbsp;clone&nbsp;</span><span class="markup underline link https hyperlink"><span>https://github.com/google/glog</span></span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>git&nbsp;clone&nbsp;</span><span class="markup underline link https hyperlink"><span>https://github.com/google/googletest</span></span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>git&nbsp;clone&nbsp;</span><span class="markup underline link https hyperlink"><span>https://github.com/facebook/folly</span></span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>git&nbsp;clone&nbsp;</span><span class="markup underline link https hyperlink"><span>https://github.com/facebook/wdt</span></span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>cd&nbsp;$WORKSPACE</span></span></span></div></pre></li>
+<li><p>3) 对glog以及wdt打补丁</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>#&nbsp;将补丁文件拷贝到&nbsp;$WORKSPACE/patch目录中</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>(cd&nbsp;src/glog;&nbsp;git&nbsp;apply&nbsp;../../patch/glog.patch;)</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>(cd&nbsp;src/wdt;&nbsp;git&nbsp;apply&nbsp;../../patch/wdt.patch;)</span></span></span></div></pre></li>
+</ul>
+<h2 id="-wdt">三、编译依赖库及wdt</h2>
+<p>由于依赖库之间也存在依赖关系，因此，为保证编译过程正确，请务必按以下顺序依次编译。</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span class="meta paragraph text"><span>cd&nbsp;$WORKSPACE</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>mkdir&nbsp;-p&nbsp;build</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>#&nbsp;Compile&nbsp;double-conversion</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>(mkdir&nbsp;build/double-conversion;&nbsp;cd&nbsp;build/double-conversion;&nbsp;cmake&nbsp;-DBUILD_SHARED_LIBS=on&nbsp;-DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX&nbsp;../../src/double-conversion;&nbsp;make&nbsp;-j&nbsp;2;&nbsp;make&nbsp;install)</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;</span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>#&nbsp;Compile&nbsp;gflags</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>(mkdir&nbsp;build/gflags;&nbsp;cd&nbsp;build/gflags;&nbsp;cmake&nbsp;-DBUILD_SHARED_LIBS=on&nbsp;-DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX&nbsp;-DGFLAGS_NAMESPACE=google&nbsp;../../src/gflags;&nbsp;make&nbsp;-j&nbsp;2;&nbsp;make&nbsp;install)</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;</span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>#&nbsp;Compile&nbsp;glog</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>(cd&nbsp;src/glog;&nbsp;git&nbsp;apply&nbsp;../../patch/glog.patch;)</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>(export&nbsp;CXXFLAGS=&quot;-fPIC&quot;&nbsp;&amp;&amp;&nbsp;mkdir&nbsp;build/glog;&nbsp;cd&nbsp;build/glog;&nbsp;cmake&nbsp;-DBUILD_SHARED_LIBS=on&nbsp;-DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX&nbsp;../../src/glog;&nbsp;make;&nbsp;make&nbsp;-j&nbsp;2;&nbsp;make&nbsp;install)</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;</span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>#&nbsp;Compile&nbsp;google&nbsp;test</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>(mkdir&nbsp;build/googletest;&nbsp;cd&nbsp;build/googletest;&nbsp;cmake&nbsp;-DBUILD_SHARED_LIBS=on&nbsp;-DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX&nbsp;../../src/googletest;&nbsp;make;&nbsp;make&nbsp;-j&nbsp;2;&nbsp;make&nbsp;install)</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;</span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>(mkdir&nbsp;build/wdt;&nbsp;cd&nbsp;build/wdt;&nbsp;cmake&nbsp;-DBUILD_TESTING=1&nbsp;-DBUILD_SHARED_LIBS=on&nbsp;-DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX&nbsp;../../src/wdt;&nbsp;&nbsp;make;&nbsp;make&nbsp;-j&nbsp;2;&nbsp;make&nbsp;install;)</span></span></span></div></pre><h2 id="-pdt-">四、打包PDT软件</h2>
+<p>在Cygwin环境中编译生成的软件依赖于Cygwin1.dll等库文件。
+为了保证程序在Windows环境（未安装Cygwin）下能够正确执行，我们需要将编译生成的dll库以及Cygwin库文件等一起打包。
+编译完成后，即可在指定的WINDOWS_EXE_DIR目录中找到可执行exe软件包。
+打包过程如下：</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="text plain"><span>&nbsp;&nbsp;</span><span class="meta paragraph text"><span>export&nbsp;WINDOWS_EXE_DIR=$INSTALL_PREFIX/exe</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;mkdir&nbsp;-p&nbsp;$WINDOWS_EXE_DIR</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;</span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;</span><span class="meta paragraph text"><span>cp&nbsp;/bin/cygwin1.dll&nbsp;$WINDOWS_EXE_DIR/</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;</span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;</span><span class="meta paragraph text"><span>cp&nbsp;/bin/cyggcc_s-seh-1.dll&nbsp;$WINDOWS_EXE_DIR/</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;cp&nbsp;/bin/cygboost_system-1_58.dll&nbsp;$WINDOWS_EXE_DIR/</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;cp&nbsp;/bin/cygstdc++-6.dll&nbsp;$WINDOWS_EXE_DIR/</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;cp&nbsp;/bin/cyggcc_s-seh-1.dll&nbsp;$WINDOWS_EXE_DIR/</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;cp&nbsp;/bin/cygcrypto-1.0.0.dll&nbsp;$WINDOWS_EXE_DIR/</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;cp&nbsp;/bin/cygz.dll&nbsp;$WINDOWS_EXE_DIR/</span></span></span></div><div class="line"><span class="text plain"><span>&nbsp;</span></span></div><div class="line"><span class="text plain"><span>&nbsp;&nbsp;</span><span class="meta paragraph text"><span>cp&nbsp;$INSTALL_PREFIX/lib/cyggflags-*.dll&nbsp;$WINDOWS_EXE_DIR/</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;cp&nbsp;$INSTALL_PREFIX/bin/cygglog-*.dll&nbsp;$WINDOWS_EXE_DIR/</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;cp&nbsp;$INSTALL_PREFIX/bin/cygwdt_min.dll&nbsp;$WINDOWS_EXE_DIR/</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;cp&nbsp;$INSTALL_PREFIX/bin/cygfolly4wdt.dll&nbsp;$WINDOWS_EXE_DIR/</span></span></span></div><div class="line"><span class="text plain"><span class="meta paragraph text"><span>&nbsp;&nbsp;cp&nbsp;$INSTALL_PREFIX/bin/wdt.exe&nbsp;$WINDOWS_EXE_DIR/</span></span></span></div></pre><h2 id="-wdt-">五、WDT使用</h2>
+<p>将软件包拷贝到所需路径，分别在接收端和发送端CMD命令行执行下列指令，即可进行文件传输。  </p>
+<ul>
+<li>接收端： <code>wdt.exe -directory RECEIVE_DIR -transfer_id xxxxxxxx -run_as_daemon=true -ipv4</code><ul>
+<li><code>RECEIVE_DIR</code>表示接收端存放接收数据的目录。</li>
+<li><code>transfer_id</code>指定接收端的传输id。不使用该参数则wdt程序自动生成。</li>
+<li><code>run_as_daemon</code>设置为true，指定接收端以daemon模式运行，一直在线监听。</li>
+</ul>
+</li>
+<li>发送端： <code>wdt.exe -directory SEND_DATA_DIR -destination REVEIVER_IP -transfer_id xxxxxxxx</code><ul>
+<li><code>SEND_DATA_DIR</code>目录下包含一次测试需要传输的数据</li>
+<li><code>transfer_id</code>接收端指定的transfer_id参数，或接收端自动生成的transfer_id。</li>
+</ul>
+</li>
+</ul></body>
+</html>

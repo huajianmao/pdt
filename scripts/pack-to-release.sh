@@ -14,7 +14,10 @@ mkdir $RELEASE_DIR/{bin,doc,patch,src,scripts}
 
 cp apt-cyg $RELEASE_DIR/apt-cyg
 
-cp doc/使用说明文档.md $RELEASE_DIR/doc/使用说明文档.md
+cp doc/使用说明文档.md $RELEASE_DIR/doc/使用说明文档.html
+cp doc/使用说明文档.md $RELEASE_DIR/doc/使用说明文档.html
+cp doc/编译安装文档.md $RELEASE_DIR/doc/编译安装文档.html
+cp doc/性能测试报告.md $RELEASE_DIR/doc/性能测试报告.md
 cp doc/编译安装文档.md $RELEASE_DIR/doc/编译安装文档.md
 cp doc/性能测试报告.md $RELEASE_DIR/doc/性能测试报告.md
 cp doc/wdt.vs.lftp.jpg $RELEASE_DIR/doc/wdt.vs.lftp.jpg
