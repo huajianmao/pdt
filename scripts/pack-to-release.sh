@@ -13,6 +13,7 @@ mkdir -p $BUILD_DIR
 mkdir $RELEASE_DIR/{bin,doc,patch,src,scripts}
 
 cp .gitmodules $RELEASE_DIR/.gitmodules
+cp .gitignore $RELEASE_DIR/.gitignore
 
 cp apt-cyg $RELEASE_DIR/apt-cyg
 
