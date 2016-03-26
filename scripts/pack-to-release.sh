@@ -12,6 +12,8 @@ mkdir -p $RELEASE_DIR
 mkdir -p $BUILD_DIR
 mkdir $RELEASE_DIR/{bin,doc,patch,src,scripts}
 
+cp .gitmodules $RELEASE_DIR/.gitmodules
+
 cp apt-cyg $RELEASE_DIR/apt-cyg
 
 cp doc/使用说明文档.md $RELEASE_DIR/doc/使用说明文档.html

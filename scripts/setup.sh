@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # 0. Set environment
-export ENABLE_DEBUG=on
+export ENABLE_DEBUG=off
 export DO_TEST=off
+export FETCH_FROM_GITHUB=off
+
 export INSTALL_PREFIX=/tmp/pdt
 
 export OS_NAME=`uname -a | cut -d' ' -f 1 |  tr '[:upper:]' '[:lower:]'`
@@ -15,8 +17,10 @@ export PATH=$INSTALL_PREFIX/bin:$INSTALL_PREFIX/lib:$PATH
 
 # 1. Get all dependant code from github
 # git clone --recursive git@github.com:weinvent/pdt.git
-git submodule init
-git submodule update
+if [ "$FETCH_FROM_GITHUB" = "on" ]; then
+  git submodule init
+  git submodule update
+fi
 
 
 # 2. Install libraries
