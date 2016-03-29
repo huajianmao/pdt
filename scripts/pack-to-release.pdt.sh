@@ -45,7 +45,9 @@ PDT_NAME=pdt WINDOWS_EXE_DIR=$RELEASE_DIR/bin INSTALL_PREFIX=$TMP_BIN_DIR sh scr
 
 cd $RELEASE_DIR
 cp scripts/parts/do-build.sh scripts/build.sh
+sed -i 's/wdt/pdt/g' scripts/build.sh
 cp scripts/parts/do-archive.sh scripts/archive.sh
+sed -i 's/wdt/pdt/g' scripts/archive.sh
 rm -r scripts/parts
 
 cd $DST_DIR/release/
