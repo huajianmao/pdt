@@ -1,11 +1,16 @@
 #!/bin/bash
 
 # 0. Set environment
-export ENABLE_DEBUG=off
-export DO_TEST=off
-export FETCH_FROM_GITHUB=off
+[ -n "$ENABLE_DEBUG" ] || ENABLE_DEBUG=off
+[ -n "$DO_TEST" ] || DO_TEST=off
+[ -n "$FETCH_FROM_GITHUB" ] || FETCH_FROM_GITHUB=on
+[ -n "$INSTALL_PREFIX" ] || INSTALL_PREFIX=/tmp/pdt
+[ -n "$WINDOWS_EXE_DIR" ] || WINDOWS_EXE_DIR=$INSTALL_PREFIX/exe
 
-export INSTALL_PREFIX=/tmp/pdt
+#export ENABLE_DEBUG=off
+#export DO_TEST=off
+#export FETCH_FROM_GITHUB=on
+#export INSTALL_PREFIX=/tmp/pdt
 
 export OS_NAME=`uname -a | cut -d' ' -f 1 |  tr '[:upper:]' '[:lower:]'`
 
@@ -65,7 +70,7 @@ fi
 
 # 8. Copy all the dependant libraries to some directory
 if [ -z "${OS_NAME##*cygwin*}" ]; then
-  export WINDOWS_EXE_DIR=$INSTALL_PREFIX/exe
+#  export WINDOWS_EXE_DIR=$INSTALL_PREFIX/exe
 
   rm -r $WINDOWS_EXE_DIR
   mkdir -p $WINDOWS_EXE_DIR
