@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ## Replace all wdt to pdt
-DIR=wdt
+[ -n "$WDT_DIR" ] || WDT_DIR=src/wdt
 
-sed -i 's/wdt/pdt/g; s/wdT/pdT/g; s/wDt/pDt/g; s/wDT/pDT/g; s/Wdt/Pdt/g; s/WdT/PdT/g; s/WDt/PDt/g; s/WDT/PDT/g' `grep wdt -irl $DIR`
+(cd $WDT_DIR; sed -i 's/wdt/pdt/g; s/wdT/pdT/g; s/wDt/pDt/g; s/wDT/pDT/g; s/Wdt/Pdt/g; s/WdT/PdT/g; s/WDt/PDt/g; s/WDT/PDT/g' `grep wdt -irl .`)
 
 pushd .
-cd $DIR
+cd $WDT_DIR
 declare -A nameConv 
 nameConv[wdt]="pdt"
 nameConv[wdT]="pdT"
@@ -16,6 +16,7 @@ nameConv[Wdt]="Pdt"
 nameConv[WdT]="PdT"
 nameConv[WDt]="PDt"
 nameConv[WDT]="PDT"
+
 keywords="wdt wdT wDt wDT Wdt WdT WDt WDT"
 for keyword in $keywords; do
   files=`find . -name "*${keyword}*"`
@@ -25,5 +26,7 @@ for keyword in $keywords; do
   done
 done
 popd
+
+(cd $WDT_DIR/..; mv wdt pdt)
 ## done of replacing
 
