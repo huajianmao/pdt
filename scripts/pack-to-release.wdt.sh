@@ -29,21 +29,14 @@ cp patch/wdt.patch $RELEASE_DIR/patch/wdt.patch
 cp patch/glog.patch $RELEASE_DIR/patch/glog.patch
 
 cp scripts/setup.sh $RELEASE_DIR/scripts/setup.sh
-cp scripts/rename-wdt-to-pdt.sh $RELEASE_DIR/scripts/rename-wdt-to-pdt.sh
 
 cd $RELEASE_DIR/src
 git clone https://github.com/google/double-conversion
-rm -rf double-conversion/.git
 git clone https://github.com/gflags/gflags
-rm -rf gflags/.git
 git clone https://github.com/google/glog
-rm -rf glog/.git
 git clone https://github.com/google/googletest
-rm -rf googletest/.git
 git clone https://github.com/facebook/folly
-rm -rf folly/.git
 git clone https://github.com/facebook/wdt
-rm -rf wdt/.git
 
 cp -a $RELEASE_DIR $BUILD_DIR/
 cd $BUILD_DIR/$VERSION
@@ -62,6 +55,7 @@ if [ -z "${OS_NAME##*cygwin*}" ]; then
 fi
 
 mkdir -p build
+
 (mkdir build/double-conversion; cd build/double-conversion; cmake -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX ../../src/double-conversion; make -j 2; make install)
 
 (mkdir build/gflags; cd build/gflags; cmake -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX -DGFLAGS_NAMESPACE=google ../../src/gflags; make -j 2; make install)
@@ -72,7 +66,6 @@ mkdir -p build
 (mkdir build/googletest; cd build/googletest; cmake -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX ../../src/googletest; make; make -j 2; make install)
 
 (cd src/wdt; git apply ../../patch/wdt.patch;)
-(cd ../..; sh scripts/rename-wdt-to-pdt.sh)
 (mkdir build/wdt; cd build/wdt; cmake -DBUILD_TESTING=1 -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX ../../src/wdt;  make; make -j 2; make install;)
 
 if [ -z "${OS_NAME##*cygwin*}" ]; then
