@@ -17,7 +17,7 @@ cp doc/性能测试报告.html $RELEASE_DIR/doc/性能测试报告.html
 cp doc/使用说明文档.md $RELEASE_DIR/doc/使用说明文档.md
 cp doc/编译安装文档.md $RELEASE_DIR/doc/编译安装文档.md
 cp doc/性能测试报告.md $RELEASE_DIR/doc/性能测试报告.md
-cp doc/wdt.vs.lftp.jpg $RELEASE_DIR/doc/wdt.vs.lftp.jpg
+cp doc/pdt.vs.lftp.jpg $RELEASE_DIR/doc/pdt.vs.lftp.jpg
 cp -a scripts/parts $RELEASE_DIR/scripts/
 cp patch/wdt.patch $RELEASE_DIR/patch/wdt.patch
 cp patch/glog.patch $RELEASE_DIR/patch/glog.patch
