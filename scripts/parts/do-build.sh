@@ -2,6 +2,7 @@
 
 [ -n "$INSTALL_PREFIX" ] || INSTALL_PREFIX=/tmp/pdt
 [ -n "$ENABLE_DEBUG" ] || ENABLE_DEBUG=off
+[ -n "$WDT_NAME" ] || WDT_NAME=wdt
 
 mkdir -p build
 
@@ -14,7 +15,7 @@ mkdir -p build
 (mkdir build/googletest; cd build/googletest; cmake -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX ../../src/googletest; make; make -j 2; make install)
 
 if [ "$ENABLE_DEBUG" = "on" ]; then
-  (cd src/wdt; sed -i "s/^set(CMAKE_BUILD_TYPE\sRelease)$/set(CMAKE_BUILD_TYPE Debug)/g" CMakeLists.txt)
+  (cd src/${WDT_NAME}; sed -i "s/^set(CMAKE_BUILD_TYPE\sRelease)$/set(CMAKE_BUILD_TYPE Debug)/g" CMakeLists.txt)
 fi
-(mkdir build/wdt; cd build/wdt; cmake -DBUILD_TESTING=1 -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX ../../src/wdt;  make; make -j 2; make install;)
+(mkdir build/${WDT_NAME}; cd build/${WDT_NAME}; cmake -DBUILD_TESTING=1 -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX ../../src/${WDT_NAME};  make; make -j 2; make install;)
 
