@@ -1,4 +1,4 @@
-# Parallel Data Transfer (PDT)
+# Parallel Data Transfer (WDT for Cygwin)
 
 ## Install Cygwin and apt-cyg
 You may download cygwin from [official website](http://cygwin.com/setup-x86.exe). And install packages one by one in the GUI if you prefer.
@@ -11,7 +11,7 @@ Besides, to run the compiling script, we also need `git`, so install it too.
 ## Scripts for compiling
 Run the following script in Cygwin, which will run the [`scripts/setup.sh`](scripts/setup.sh) to do the compiling work.
 ``` shell
-git clone git@github.com:weinvent/pdt.git
+git clone git@github.com:huajianmao/pdt.git
 cd pdt
 sh scripts/setup.sh
 ```
@@ -21,18 +21,15 @@ sh scripts/setup.sh
 We could also use CLion to build and debug for WDT.
 
 1. Install CLion
- - Set Cygwin, CMake, and GDB
-  
+   - Set Cygwin, CMake, and GDB
 2. Set cmake parameters in `File` -> `Settings` -> `Build, Execution, Deployment` -> `CMake` -> `CMake options`
- - ` -DBUILD_SHARED_LIBS=on -D CMAKE_INSTALL_PREFIX=C:\workspace\opt` where you want to install the package.
-
+   - ` -DBUILD_SHARED_LIBS=on -D CMAKE_INSTALL_PREFIX=C:\workspace\opt` where you want to install the package.
 3. Open Project one by one
- - ***double-conversion*** `-DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
- - ***gflags*** set environment variable `CXXFLAGS` to `-fPIC` and `-DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
- - ***glog*** `-DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
- - ***googletest*** `-DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
- - ***wdt*** set environment variable `PATH` to `C:\workspace\opt\bin;C:\workspace\opt\lib;$PATH`, `-DBUILD_TESTING=1 -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
- 
+   - ***double-conversion*** `-DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+   - ***gflags*** set environment variable `CXXFLAGS` to `-fPIC` and `-DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+   - ***glog*** `-DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+   - ***googletest*** `-DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
+   - ***wdt*** set environment variable `PATH` to `C:\workspace\opt\bin;C:\workspace\opt\lib;$PATH`, `-DBUILD_TESTING=1 -DCMAKE_BUILD_TYPE=Debug -DBUILD_SHARED_LIBS=on -DCMAKE_INSTALL_PREFIX=C:\workspace\opt` for cmake
 4. Add `make install` in CMakeLists.txt
   ```
   add_custom_target(install_${PROJECT_NAME}
